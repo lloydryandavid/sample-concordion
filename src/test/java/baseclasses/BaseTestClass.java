@@ -8,14 +8,8 @@ import restwebservice.RestWebService;
 
 public class BaseTestClass {
 
-    private RestWebService webService = new RestWebService();
     private RestClient restClient = new RestClient();
 
-    @BeforeSpecification
-    public void startComponents(){webService.startRestWebService();}
-
-    @AfterSpecification
-    public void stopComponents(){webService.stopRestWebService();}
 
     public HttpResponse sendGetRequest(String uri) throws Exception {
         return restClient.sendGetRequest(uri);
