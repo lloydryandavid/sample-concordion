@@ -1,17 +1,21 @@
 package baseclasses;
 
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClientBuilder;
 
 
 public class RestClient {
 
-    private RestTemplate restTemplate = new RestTemplate();
-    private static final String GET_URI = "http://localhost:1080/greeting";
+    public HttpResponse sendGetRequest(String getUri) throws Exception{
+        HttpClient client = HttpClientBuilder.create().build();
+        return client.execute(new HttpGet(getUri));
+    }
 
-    public ResponseEntity<String> sendGetRequest(String getUri){
-        return restTemplate.getForEntity(getUri, String.class);
+    public String getResponseCodeAsString(HttpResponse httpResponse){
+        return Integer.toString(httpResponse.getStatusLine().getStatusCode());
     }
 
 }
