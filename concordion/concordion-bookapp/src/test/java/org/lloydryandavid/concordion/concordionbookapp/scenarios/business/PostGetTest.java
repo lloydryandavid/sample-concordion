@@ -9,4 +9,4 @@ import org.lloydryandavid.concordion.concordionbookapp.baseclass.ConcordionBookA
 
 @FullOGNL
 @RunWith(ConcordionRunner.class)
-public class PostUpdateDeleteGetTest extends ConcordionBookAppBaseTestClass {}
+public class PostGetTest extends ConcordionBookAppBaseTestClass {}

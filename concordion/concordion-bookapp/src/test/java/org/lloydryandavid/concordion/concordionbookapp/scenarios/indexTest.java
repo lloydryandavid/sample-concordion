@@ -10,5 +10,4 @@ import org.junit.runner.RunWith;
 @RunWith(ConcordionRunner.class)
 @FullOGNL
 @Extensions(RunTotalsExtension.class)
-public class indexTest {
-}
+public class indexTest {}
