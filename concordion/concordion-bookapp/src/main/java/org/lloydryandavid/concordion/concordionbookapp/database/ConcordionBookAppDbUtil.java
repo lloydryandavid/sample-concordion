@@ -13,7 +13,7 @@ public class ConcordionBookAppDbUtil {
     public static final String password = "password";
     public static final String dbDriver = "org.postgresql.Driver";
 
-    public static final String clearDbSqlBookTable = "DELETE FROM public.books";
+    public static final String clearDbSqlBookTable = "DELETE FROM public.book";
 
     public void initializeDatabase(){
         DataSource dataSource = DataSourceBuilder.create().url(databaseUrl)

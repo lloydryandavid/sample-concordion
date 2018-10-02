@@ -13,7 +13,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableAutoConfiguration
 @PropertySource("classpath:application.yml")
-public class LibraryConfig {
+public class BookAppConfig {
 
     @Autowired
     Environment environment;

@@ -3,7 +3,6 @@ package org.lloydryandavid.concordion.concordionbookapp.baseclass;
 
 import org.concordion.api.AfterSpecification;
 import org.concordion.api.BeforeSpecification;
-import org.junit.BeforeClass;
 import org.lloydryandavid.bookapp.BookApplication;
 import org.lloydryandavid.concordion.concordionbookapp.database.ConcordionBookAppDbUtil;
 import org.lloydryandavid.concordion.concordionbookapp.restclient.ConcordionBookAppRestClient;
@@ -29,7 +28,13 @@ public abstract class ConcordionBookAppBaseTestClass {
     @AfterSpecification
     public void stopBookAppRestWebService(){
         alreadyStarted = true;
+        dbUtil.initializeDatabase();
     }
+
+    public ResponseEntity<String> sendHttpGetMessage(String url){
+        return concordionBookAppRestClient.sendHttpGetMessage(url);
+    }
+
 
     public ResponseEntity<String> sendHttpPostMessage(String url, Map<String, String> httpPostMessageMap){
             return concordionBookAppRestClient.sendHttpPostMessage(url, httpPostMessageMap);

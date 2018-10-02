@@ -17,8 +17,32 @@
             <hr class="style-seven"/>
         </div>
         <div id="tests">
-            <div c:example="TEST_001 - Add An Entry That Has Already Been Added">
-                <h3>TEST_001 - Add An Entry That Has Already Been Added</h3>
+            <div c:example="TEST_001 - Fetch A Non-Existent Entry">
+                <h3>TEST_001 - Fetch A Non-Existent Entry</h3>
+                <p><b><br/>GIVEN</b> that the BookApplication web service is running</p>
+                <p><b><br/>WHEN</b> an http GET message has been sent below where entry does not exist</p>
+                    <table c:execute="#response = sendHttpGetMessage(#url)">
+                        <tr>
+                            <th c:set="#url">URL</th>
+                        </tr>
+                        <tr>
+                            <td>http://localhost:8080/api/books?author=David Mitchell&amp;title=Cloud Atlas</td>
+                        </tr>
+                    </table>
+                <p><b><br/>THEN</b> the response should be:</p>
+                    <table>
+                        <tr>
+                            <th>HTTP Status Code</th>
+                            <th>Message</th>
+                        </tr>
+                        <tr>
+                            <td c:assertEquals="#response.getStatusCodeValue()">200</td>
+                            <td c:assertEquals="#response.getBody()">[]</td>
+                        </tr>
+                    </table>
+            </div>
+            <div c:example="TEST_002 - Add An Entry That Has Already Been Added">
+                <h3>TEST_002 - Add An Entry That Has Already Been Added</h3>
                 <p><b><br/>GIVEN</b> that the BookApplication web service is running</p>
                 <p><b><br/>WHEN</b> the following information were used to send a POST message</p>
                     <table c:execute="#response = sendHttpPostMessage(#url, #{'title':#title,'author':#author})">
@@ -37,13 +61,11 @@
                     <table c:execute="#responseAsMap = getResponseAsMap(#response)">
                         <tr>
                             <th c:assertEquals="#responseAsMap.status">HTTP Status Code</th>
-                            <th c:assertEquals="#responseAsMap.title">Title</th>
-                            <th c:assertEquals="#responseAsMap.author">Author</th>
+                            <th c:assertEquals="#responseAsMap.message">Message</th>
                         </tr>
                         <tr>
                             <td>200</td>
-                            <td>The Catcher in the Rye</td>
-                            <td>Jerome David Salingere</td>
+                            <td>Successfully added entry</td>
                         </tr>
                     </table>
                 <p><b><br/>WHEN</b> the same information was added again via HTTP POST message</p>
@@ -63,13 +85,11 @@
                     <table c:execute="#responseAsMap = getResponseAsMap(#response)">
                         <tr>
                             <th c:assertEquals="#responseAsMap.status">HTTP Status Code</th>
-                            <th c:assertEquals="#responseAsMap.title">Title</th>
-                            <th c:assertEquals="#responseAsMap.author">Author</th>
+                            <th c:assertEquals="#responseAsMap.reason">Message</th>
                         </tr>
                         <tr>
-                            <td>500</td>
-                            <td>(null)</td>
-                            <td>(null)</td>
+                            <td>422</td>
+                            <td>Entry already exists</td>
                         </tr>
                     </table>
             </div>
