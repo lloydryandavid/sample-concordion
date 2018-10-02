@@ -6,13 +6,13 @@
             hr.style-seven:before{display: block; content: ""; height: 30px; margin-top: -31px; border-style: solid;
             border-color: black; border-width: 0 0 1px 0; border-radius: 20px; }
         </style>
-        <title>Post, and Get Tests For the BookApplication Web Service</title>
+        <title>Post, Get, and Delete Tests For the BookApplication Web Service</title>
     </head>
     <body>
         <div id="description">
-            <h1>Post, and Get Tests For the BookApplication Web Service</h1>
+            <h1>Post, Get, and Delete Tests For the BookApplication Web Service</h1>
                 <h3>Description</h3>
-                    <p>The goal of this test is to check whether the Post, and Get, features of the BookApplication
+                    <p>The goal of this test is to check whether the Post, Get, and Delete features of the BookApplication
                     Web Service behaves as expected.</p><br/>
             <hr class="style-seven"/>
         </div>
@@ -64,7 +64,43 @@
                                 <td c:assertEquals="#response.getBody()">[["Jules Verne","Twenty Thousand Leagues Under The Sea"]]</td>
                             </tr>
                         </table>
-
+                    <p><b><br/>WHEN</b> an http DELETE message has been sent below for the Book entry that was just added</p>
+                        <table c:execute="#response = sendHttpDeleteMessage(#url, #{'title':#title,'author':#author})">
+                            <tr>
+                                <th c:set="#url">URL</th>
+                                <th c:set="#title">Title</th>
+                                <th c:set="#author">Author</th>
+                            </tr>
+                            <tr>
+                                <td>http://localhost:8080/api/books</td>
+                                <td>Twenty Thousand Leagues Under The Sea</td>
+                                <td>Jules Verne</td>
+                            </tr>
+                        </table>
+                    <p><b><br/>THEN</b> the response should be </p>
+                        <table c:execute="#responseAsMap = getResponseAsMap(#response)">
+                            <tr>
+                                <th c:assertEquals="#responseAsMap.status">HTTP Status Code</th>
+                                <th c:assertEquals="#responseAsMap.message">Message</th>
+                            </tr>
+                            <tr>
+                                <td>200</td>
+                                <td>Successfully deleted entry</td>
+                            </tr>
+                        </table>
+                    <p><b><br/>THEN</b> sending an http GET message using the information below should pass the following assertions</p>
+                        <table c:execute="#response = sendHttpGetMessage(#url)">
+                            <tr>
+                                <th c:set="#url">URL</th>
+                                <th c:assertEquals="#response.getStatusCodeValue()">Response Status Code</th>
+                                <th c:assertEquals="#response.getBody()">Response Body</th>
+                            </tr>
+                            <tr>
+                                <td>http://localhost:8080/api/books?author=Jules Verne&amp;title=Twenty Thousand Leagues Under The Sea</td>
+                                <td>200</td>
+                                <td>[]</td>
+                            </tr>
+                        </table>
             </div>
         </div>
     </body>

@@ -39,6 +39,11 @@ public class ConcordionBookAppRestClient {
         return responseEntity;
     }
 
+    public ResponseEntity<String> sendHttpDeleteMessage(String url, Map<String, String> httpPostMessageMap){
+        HttpEntity<HashMap<String, String>> postRequest = new HttpEntity(httpPostMessageMap, headers);
+        return restTemplate.exchange(url, HttpMethod.DELETE, postRequest, String.class);
+    }
+
     public Map<String, String> convertResponseAsMap(ResponseEntity<String> responseEntity) throws Exception{
         ObjectMapper mapper = new ObjectMapper();
         Map<String, String> map = new HashMap();

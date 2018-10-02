@@ -40,6 +40,11 @@ public abstract class ConcordionBookAppBaseTestClass {
             return concordionBookAppRestClient.sendHttpPostMessage(url, httpPostMessageMap);
     }
 
+    public ResponseEntity<String> sendHttpDeleteMessage(String url, Map<String, String> httpPostMessageMap){
+        return concordionBookAppRestClient.sendHttpDeleteMessage(url, httpPostMessageMap);
+    }
+
+
     public Map<String, String> getResponseAsMap(ResponseEntity<String> responseEntity) throws Exception{
         return concordionBookAppRestClient.convertResponseAsMap(responseEntity);
     }

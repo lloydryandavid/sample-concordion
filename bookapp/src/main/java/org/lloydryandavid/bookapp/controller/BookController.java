@@ -42,4 +42,12 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.OK).body("{\"message\":\"Successfully added entry\"}");
     }
 
+    @DeleteMapping("/books")
+    public ResponseEntity deleteBookRecord(@Valid @RequestBody Book book) {
+        String author = book.getAuthor();
+        String title = book.getTitle();
+        bookRepository.deleteBooks(author, title);
+        return ResponseEntity.status(HttpStatus.OK).body("{\"message\":\"Successfully deleted entry\"}");
+    }
+
 }
