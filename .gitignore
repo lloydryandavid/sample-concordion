@@ -2,7 +2,8 @@
 *.class
 
 # Target Directory
-*/target/**
+*/target/**/**
+concordion/*/target/**
 
 
 # Log file
