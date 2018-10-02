@@ -4,6 +4,7 @@
 # Target Directory
 */target/**
 
+
 # Log file
 *.log
 
