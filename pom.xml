@@ -12,6 +12,7 @@
         <module>concordion</module>
         <module>bookapp</module>
         <module>wiremocksample</module>
+        <module>loginapp</module>
     </modules>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
