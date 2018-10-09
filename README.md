@@ -6,6 +6,7 @@ This repository was created to demonstrate test automation using the following:
 3. Concordion Test Framework
 4. Liquibase
 5. Web Services Testing via RESTful, and SOAP
+6. Testing using Selenium via Concordion Test Framework
 
 Pre-requisites in testing:
 1. Java Development Kit 8 is installed.
